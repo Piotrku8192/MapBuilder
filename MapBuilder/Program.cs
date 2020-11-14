@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EuropeanWars.Core.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,8 +8,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 
-namespace MapBuilder {
+namespace EuropeanWars.GameMap {
     class Program {
         static Bitmap bitmap;
         static Dictionary<string, Province> provinces = new Dictionary<string, Province>();
@@ -23,19 +25,24 @@ namespace MapBuilder {
 
             Console.WriteLine("Destination path: ");
             path = Console.ReadLine();
-            bitmap.Save(path + "\\resized.bmp");
+            //bitmap.Save(path + "\\resized.bmp");
 
             Console.WriteLine("Generating meshes...");
             provinces = GetProvinces();
 
             Console.WriteLine("Generating borders...");
+            //bitmap = ScaleBitmap(bitmap);
             borders = GetBorders();
 
-            Console.WriteLine("Saveing...");
-            string json = JsonConvert.SerializeObject(provinces, Formatting.Indented);
-            File.WriteAllText(path + "\\provinces.json", json);
-            string b = JsonConvert.SerializeObject(borders, Formatting.Indented);
-            File.WriteAllText(path + "\\borders.json", b);
+            Console.WriteLine("Saving...");
+            foreach (var item in provinces) {
+                item.Value.color = item.Key;
+            }
+            string final = System.Convert.ToBase64String(
+                Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(
+                    new MapData() { borders = borders, provinces = provinces.Values.ToList() })));
+
+            File.WriteAllText(path + "\\map", final);
         }
 
         /// <summary>

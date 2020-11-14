@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 
-namespace MapBuilder {
+namespace EuropeanWars.GameMap {
     [Serializable]
     class Border {
         public string firstProvince;

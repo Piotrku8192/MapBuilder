@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace MapBuilder {
+namespace EuropeanWars.GameMap {
     [Serializable]
     class Mesh {
         public List<Vector2> vertices = new List<Vector2>();

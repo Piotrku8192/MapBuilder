@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace MapBuilder {
+namespace EuropeanWars.GameMap {
     [Serializable]
     class Province {
+        public string color;
         public Mesh mesh = new Mesh();
-        public Border[] borders = new Border[0];
     }
 }

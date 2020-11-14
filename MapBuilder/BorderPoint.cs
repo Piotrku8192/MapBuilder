@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Numerics;
 
-namespace MapBuilder {
+namespace EuropeanWars.GameMap {
     [Serializable]
     struct BorderPoint {
         private static readonly Vector2[] neighbours = new Vector2[4] {
